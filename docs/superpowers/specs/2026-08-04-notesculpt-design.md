@@ -144,6 +144,7 @@ NoteSculptError (base, exit_code=1)
 - `read_file(path)` — 读取 UTF-8 文本，失败抛 `FileError`
 - `output_path(input_path, output_dir)` — 生成 `{stem}_refined.md` 路径
 - `write_file(path, content)` — 写入文件，自动创建父目录
+- `load_prompt_file(path)` — 读取自定义 prompt 文件内容（纯文本）
 
 仅支持 `.md` 扩展名（MVP 不处理 `.markdown`）。
 
@@ -192,7 +193,7 @@ notesculpt config show-status   # 查看配置状态
 | `target` | PATH（必须） | — | 文件或目录 |
 | `--level` | choice | moderate | brief / moderate / detailed |
 | `--prompt-file` | PATH | — | 自定义 prompt 文件 |
-| `--in-place` | flag | — | 原地覆盖（与 `--stdout`/`--output-dir` 互斥） |
+| `--in-place` | flag | — | 原地覆盖（需用户确认，与 `--stdout`/`--output-dir` 互斥） |
 | `--stdout` | flag | — | 输出到终端（与 `--in-place` 互斥） |
 | `--output-dir` | PATH | — | 指定输出目录（与 `--in-place` 互斥） |
 
