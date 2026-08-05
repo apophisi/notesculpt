@@ -9,4 +9,8 @@ dependencies = [
     "keyring>=25.7.0",
     "pytest>=9.1.1",
     "python-dotenv>=1.2.2",
+    "openai>=2.53.0",
 ]
+
+[project.scripts]
+notesculpt = "notesculpt.cli:cli"

@@ -1,5 +1,8 @@
+from notesculpt.cli import cli
+
+
 def main():
-    print("Hello from notesculpt!")
+    cli()
 
 
 if __name__ == "__main__":
