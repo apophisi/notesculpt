@@ -400,6 +400,16 @@ text
 - 全量测试 45/45 通过，无回归
 - **注意：** `files.py` 再次被写入项目根目录，Subagent 自行修正。此问题与 Task 2 相同模式，说明 PLAN 中的路径约束仍不够显式。
 
+#### Task 6 验证结论
+
+- LLM 客户端正确封装 OpenAI SDK，`base_url` 指向 DeepSeek API
+- 重试逻辑：最多 3 次，指数退避 1s→2s→4s，仅对 `RetryableError` 子类触发
+- 错误分类映射正确：`AuthenticationError`→`AuthError`、`RateLimitError`→`RateLimitError`、`APIConnectionError`/`APITimeoutError`→`NetworkError`、`APIStatusError`(5xx)→`ServerError`
+- 空结果检查：`content` 为空或 `None` 时抛出 `FatalError`
+- `temperature=0.3` 固定内置，不暴露为参数
+- 10 个测试全部通过，包括正常调用、参数验证、空结果、重试逻辑、指数退避验证、重试耗尽、不可恢复错误立即失败
+- 全量测试 55/55 通过，无回归
+
 ### 3.3 验证反思
 
 > 冷启动验证让我意识到：**PLAN.md 中每个 Task 的「涉及文件」字段需要更加明确**。虽然 SPEC 的「架构设计」一节列出了完整目录树，但 PLAN 作为子 agent 执行时的主要参考，需要在每个步骤中显式写出文件路径。
@@ -407,7 +417,7 @@ text
 **设计验证的总体结论：**
 - SPEC 中 8 个模块的数据模型、错误处理、配置管理设计在实践中验证通过
 - 文件路径歧义是唯一暴露的问题，已在冷启动阶段修正
-- Task 3-4 的顺利执行表明修正后的 PLAN 质量达到预期
+- Task 3-6 的顺利执行表明修正后的 PLAN 质量达到预期
 - PLAN 中的测试代码与实际实现之间可能存在细微不一致（如 keyring 键名），但 Subagent 具备自行发现并修正的能力
 
 
@@ -424,3 +434,5 @@ text
 | 2026-08-05 | 添加冷启动验证记录 | 冷启动验证完成 |
 | 2026-08-05 | 添加 Task 3 验证记录 | Task 3 实现完成 |
 | 2026-08-05 | 添加 Task 4 验证记录 | Task 4 实现完成 |
+| 2026-08-05 | 添加 Task 5 验证记录 | Task 5 实现完成 |
+| 2026-08-05 | 添加 Task 6 验证记录 | Task 6 实现完成 |

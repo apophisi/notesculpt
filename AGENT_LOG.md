@@ -50,3 +50,14 @@
 - **修正记录：** `files.py` 再次被写入项目根目录，Subagent 自行 `mv` 修正（与 Task 2 相同模式）
 - **学到的教训：** PLAN.md 中「文件必须在 notesculpt/ 包目录下」的约束需要更显式地强调，或作为全局约束放在 PLAN 开头
 
+### Task 6: LLM 客户端（llm.py）
+
+- **时间：** 2026-08-05
+- **Subagent：** OpenCode SDD 工作流
+- **产出 commit：** 待提交
+- **测试结果：** 10/10 通过，全量 55/55 通过
+- **评审结果：** ✅ 通过
+- **人工干预：** 无
+- **修正记录：** 无
+- **学到的教训：** LLM 客户端重试逻辑测试需要 mock OpenAI SDK 异常类型，`openai.RateLimitError` 等需传入 `response` 和 `body` 参数
+
