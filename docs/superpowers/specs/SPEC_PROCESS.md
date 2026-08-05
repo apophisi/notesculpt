@@ -410,6 +410,14 @@ text
 - 10 个测试全部通过，包括正常调用、参数验证、空结果、重试逻辑、指数退避验证、重试耗尽、不可恢复错误立即失败
 - 全量测试 55/55 通过，无回归
 
+#### Task 7 验证结论
+
+- 精炼核心正确实现三种级别 prompt 构建（brief/moderate/detailed），默认 prompt 包含核心摘要 + 要点总结 + 自适应章节
+- 自定义 prompt 通过 `--prompt-file` 完全覆盖默认 prompt，`Refiner` 通过依赖注入 `LLMClient` 接口实现 mock
+- `RefineResult` 正确计算 `original_chars`、`refined_chars`，生成 `timestamp`
+- 7 个测试全部通过，覆盖返回值结构、LLM 调用参数、三种级别 prompt 关键词、自定义 prompt 覆盖、输出结构验证
+- 全量测试 62/62 通过，无回归
+
 ### 3.3 验证反思
 
 > 冷启动验证让我意识到：**PLAN.md 中每个 Task 的「涉及文件」字段需要更加明确**。虽然 SPEC 的「架构设计」一节列出了完整目录树，但 PLAN 作为子 agent 执行时的主要参考，需要在每个步骤中显式写出文件路径。
@@ -436,3 +444,4 @@ text
 | 2026-08-05 | 添加 Task 4 验证记录 | Task 4 实现完成 |
 | 2026-08-05 | 添加 Task 5 验证记录 | Task 5 实现完成 |
 | 2026-08-05 | 添加 Task 6 验证记录 | Task 6 实现完成 |
+| 2026-08-05 | 添加 Task 7 验证记录 | Task 7 实现完成 |

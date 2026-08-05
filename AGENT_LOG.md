@@ -61,3 +61,14 @@
 - **修正记录：** 无
 - **学到的教训：** LLM 客户端重试逻辑测试需要 mock OpenAI SDK 异常类型，`openai.RateLimitError` 等需传入 `response` 和 `body` 参数
 
+### Task 7: 精炼核心（refiner.py）
+
+- **时间：** 2026-08-05
+- **Subagent：** OpenCode SDD 工作流
+- **产出 commit：** 待提交
+- **测试结果：** 7/7 通过，全量 62/62 通过
+- **评审结果：** ✅ 通过
+- **人工干预：** 无
+- **修正记录：** 无
+- **学到的教训：** 精炼 prompt 模板使用 `{level_instruction}` 占位符，`Refiner` 通过依赖注入 `LLMClient` 接口实现 mock，便于单元测试
+
