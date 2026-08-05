@@ -308,9 +308,8 @@ uv run pytest tests/test_models.py -v
 
 预期：全部 FAIL（模块不存在）
 
-- [ ] **Step 3: 实现 models.py**
-
-写入 `notesculpt/models.py`：
+- [ ] **Step 3: 实现 notesculpt/models.py**
+  写入 `notesculpt/models.py`（注意：文件必须在 notesculpt/ 包目录下，而非项目根目录）
 
 ```python
 from dataclasses import dataclass

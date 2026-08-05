@@ -355,10 +355,40 @@ MVP 精炼控制：
 
 ## 3. 冷启动验证
 
-TBD
+## 2. 冷启动验证记录
+
+### 验证设置
+- **验证时间：** 2026-08-05
+- **主开发 agent：** OpenCode + DeepSeek V4 Pro
+- **验证用 agent：** OpenCode（全新 session，无历史上下文）
+- **选取的 Task：** Task 1（脚手架）+ Task 2（数据模型）
+
+### 验证过程记录
+
+**agent 在哪里暂停并提问：**
+- **未提问**——它直接执行了，没有暂停询问。这说明：虽然 SPEC 有歧义，但 agent 选择「先做，遇到问题再修正」，而非「停下来问」。
+
+**暴露的 spec 缺陷：**
+- PLAN.md 中 Task 2 Step 3 未明确 `models.py` 的文件路径，导致 agent 将文件写入项目根目录而非 `notesculpt/` 包内。
+
+**与预期不一致的解读：**
+- 新 agent 理解「实现 models.py」为「在根目录创建 models.py」，而非「在 notesculpt/ 包内创建 models.py」。
+
+### 产出与修正
+
+**修正前的 PLAN 片段：**
+ Step 3: 实现 models.py
+text
+
+**修正后的 PLAN 片段：**
+ Step 3: 实现 notesculpt/models.py
+注意：文件必须在 notesculpt/ 包目录下，而非项目根目录。
+text
+
+**修正 commit hash：** TBD（在本次修正后提交）
 
 ---
 
 ## 4. 反思
 
-TBD
+> 冷启动验证让我意识到：**PLAN.md 中每个 Task 的「涉及文件」字段需要更加明确**。虽然 SPEC 的「架构设计」一节列出了完整目录树，但 PLAN 作为子 agent 执行时的主要参考，需要在每个步骤中显式写出文件路径。
