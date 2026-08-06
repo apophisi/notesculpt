@@ -441,6 +441,7 @@ text
 - Dockerfile：Python 3.11-slim + uv 单阶段构建，`notesculpt` 入口点，`.dockerignore` 排除测试/文档
 - CI 配置：`.github/workflows/ci.yml`，包含 `unit-test` job（uv + pytest）和 `build-docker` job（依赖 unit-test，setup-buildx + docker build + docker run 验证）
 - README：完整的获取、Docker/本地运行、三级 API Key 安全配置（keyring/env/.env）说明
+- **修正：** 修复 Docker 镜像中 `notesculpt` 入口点缺失。根因：`uv sync` 默认不为未声明 `package = true` 的项目安装 entry points。修正在 `pyproject.toml` 添加 `[tool.uv] package = true`，重新生成 `uv.lock`
 
 ### 3.3 验证反思
 
@@ -472,3 +473,4 @@ text
 | 2026-08-06 | 添加 Task 8 验证记录 | Task 8 实现完成 |
 | 2026-08-06 | 添加 Task 9 验证记录 | Task 9 集成验证完成 |
 | 2026-08-06 | 添加 Docker + CI 配置验证记录 | Docker + CI 配置完成 |
+| 2026-08-06 | 修复 Docker 入口点缺失（`[tool.uv] package = true`） | `notesculpt` 二进制未生成 |

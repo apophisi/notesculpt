@@ -107,4 +107,5 @@
 - **评审结果：** ✅ 通过
 - **人工干预：** 无
 - **学到的教训：** Docker 镜像中 `[project.scripts]` 入口点需通过 `uv sync` 安装项目才能使用，使用 `.dockerignore` 避免将测试/文档复制进镜像
+- **修正记录：** 修复 Docker 镜像中 `notesculpt` 入口点缺失问题。根因是 `uv sync` 默认不安装未显式声明为 package 的项目的 entry points。修正：在 `pyproject.toml` 添加 `[tool.uv] package = true`，并重新生成 `uv.lock`
 
