@@ -397,7 +397,7 @@ text
 - 5 个文件 I/O 工具函数全部正确实现：`discover_files`、`read_file`、`output_path`、`write_file`、`load_prompt_file`
 - 所有 I/O 错误正确封装为 `FileError`
 - 14 个测试全部通过，覆盖正常路径、边界条件、错误路径
-- 全量测试 45/45 通过，无回归
+- 全量测试 45/45 通过，无回归e
 - **注意：** `files.py` 再次被写入项目根目录，Subagent 自行修正。此问题与 Task 2 相同模式，说明 PLAN 中的路径约束仍不够显式。
 
 #### Task 6 验证结论
@@ -417,6 +417,16 @@ text
 - `RefineResult` 正确计算 `original_chars`、`refined_chars`，生成 `timestamp`
 - 7 个测试全部通过，覆盖返回值结构、LLM 调用参数、三种级别 prompt 关键词、自定义 prompt 覆盖、输出结构验证
 - 全量测试 62/62 通过，无回归
+
+#### Task 8 验证结论
+
+- CLI 命令正确实现：`notesculpt refine` 主命令 + `notesculpt config` 子命令组
+- 参数互斥检查在 CLI 层正确实现（`--in-place` 与 `--stdout`/`--output-dir` 互斥）
+- `format_output()` 独立函数生成包含元信息块的输出（精炼时间、字数、压缩比）
+- 批量处理模式：单文件失败不中断流程，汇总报告（成功数/失败数/失败文件列表）
+- `--in-place` 模式有确认提示，`--stdout` 模式输出到终端
+- 12 个测试全部通过，覆盖 config 命令、refine 命令、互斥检查、单文件处理、stdout 输出、批量处理、format_output
+- 全量测试 74/74 通过，无回归
 
 ### 3.3 验证反思
 
@@ -444,4 +454,5 @@ text
 | 2026-08-05 | 添加 Task 4 验证记录 | Task 4 实现完成 |
 | 2026-08-05 | 添加 Task 5 验证记录 | Task 5 实现完成 |
 | 2026-08-05 | 添加 Task 6 验证记录 | Task 6 实现完成 |
+| 2026-08-06 | 添加 Task 8 验证记录 | Task 8 实现完成 |
 | 2026-08-05 | 添加 Task 7 验证记录 | Task 7 实现完成 |
