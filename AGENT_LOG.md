@@ -86,7 +86,7 @@
 
 - **时间：** 2026-08-06
 - **执行方式：** OpenCode 交互式
-- **产出 commit：** 待提交
+- **产出 commit：** ea8dd01
 - **测试结果：** 全量 74/74 通过
 - **CLI 验证：** `main.py --help`、`refine --help`、`config --help` 正常
 - **包安装验证：** `uv pip install -e .` 成功，`notesculpt` CLI 入口正常
@@ -94,4 +94,17 @@
 - **人工干预：** 无
 - **已知问题：** `config show-status` 在无桌面环境时报 keyring NoKeyringError（运行环境问题，非代码缺陷）
 - **学到的教训：** MVP 全部 8 个核心模块 + 74 个测试通过，集成验证完成
+
+### Docker + CI 配置
+
+- **时间：** 2026-08-06
+- **执行方式：** OpenCode 交互式
+- **产出 commit：** b75aeee（Dockerfile + CI + README），后续补充 build-docker job
+- **内容：**
+  - Dockerfile：Python 3.11-slim + uv，`.dockerignore` 排除测试/文档
+  - CI：`unit-test` job（uv + pytest），`build-docker` job（needs unit-test，setup-buildx + docker build + docker run 验证）
+  - README：获取、Docker/本地运行、三级 API Key 配置说明
+- **评审结果：** ✅ 通过
+- **人工干预：** 无
+- **学到的教训：** Docker 镜像中 `[project.scripts]` 入口点需通过 `uv sync` 安装项目才能使用，使用 `.dockerignore` 避免将测试/文档复制进镜像
 

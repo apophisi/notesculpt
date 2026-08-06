@@ -22,3 +22,22 @@ jobs:
 
       - name: Run tests
         run: uv run pytest tests/ -v
+
+  build-docker:
+    needs: unit-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: notesculpt:latest
+
+      - name: Test Docker image
+        run: docker run --rm notesculpt:latest --help

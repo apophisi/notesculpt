@@ -436,6 +436,12 @@ text
 - `config show-status` 在无桌面环境时报 keyring NoKeyringError（运行环境问题，非代码缺陷）
 - MVP 全部 8 个核心模块实现完成，集成验证通过
 
+#### Docker + CI 配置验证
+
+- Dockerfile：Python 3.11-slim + uv 单阶段构建，`notesculpt` 入口点，`.dockerignore` 排除测试/文档
+- CI 配置：`.github/workflows/ci.yml`，包含 `unit-test` job（uv + pytest）和 `build-docker` job（依赖 unit-test，setup-buildx + docker build + docker run 验证）
+- README：完整的获取、Docker/本地运行、三级 API Key 安全配置（keyring/env/.env）说明
+
 ### 3.3 验证反思
 
 > 冷启动验证让我意识到：**PLAN.md 中每个 Task 的「涉及文件」字段需要更加明确**。虽然 SPEC 的「架构设计」一节列出了完整目录树，但 PLAN 作为子 agent 执行时的主要参考，需要在每个步骤中显式写出文件路径。
@@ -465,3 +471,4 @@ text
 | 2026-08-05 | 添加 Task 7 验证记录 | Task 7 实现完成 |
 | 2026-08-06 | 添加 Task 8 验证记录 | Task 8 实现完成 |
 | 2026-08-06 | 添加 Task 9 验证记录 | Task 9 集成验证完成 |
+| 2026-08-06 | 添加 Docker + CI 配置验证记录 | Docker + CI 配置完成 |
