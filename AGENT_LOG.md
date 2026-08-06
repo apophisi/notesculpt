@@ -82,3 +82,16 @@
 - **人工干预：** 测试用例中互斥检查需要实际文件路径（click.Path(exists=True) 先校验），修正测试使用 temp_dir fixture
 - **学到的教训：** Click 的 `click.Path(exists=True)` 在参数解析阶段校验，互斥逻辑在函数体内，测试需提供真实存在的文件路径
 
+### Task 9: 集成验证
+
+- **时间：** 2026-08-06
+- **执行方式：** OpenCode 交互式
+- **产出 commit：** 待提交
+- **测试结果：** 全量 74/74 通过
+- **CLI 验证：** `main.py --help`、`refine --help`、`config --help` 正常
+- **包安装验证：** `uv pip install -e .` 成功，`notesculpt` CLI 入口正常
+- **评审结果：** ✅ 通过
+- **人工干预：** 无
+- **已知问题：** `config show-status` 在无桌面环境时报 keyring NoKeyringError（运行环境问题，非代码缺陷）
+- **学到的教训：** MVP 全部 8 个核心模块 + 74 个测试通过，集成验证完成
+
