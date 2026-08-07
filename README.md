@@ -4,6 +4,12 @@
 
 ## 获取
 
+### 从 GHCR 拉取（推荐）
+
+```bash
+docker pull ghcr.io/apophisi/notesculpt:latest
+```
+
 ### 从源码构建（Docker）
 
 ```bash
@@ -25,14 +31,17 @@ uv sync
 ### Docker
 
 ```bash
-# 查看帮助
+# 查看帮助（GHCR 镜像）
+docker run ghcr.io/apophisi/notesculpt:latest --help
+
+# 查看帮助（本地构建的镜像）
 docker run notesculpt --help
 
 # 精炼单个文件
-docker run -v $(pwd):/data -e DEEPSEEK_API_KEY=sk-xxx notesculpt refine /data/notes.md
+docker run -v $(pwd):/data -e DEEPSEEK_API_KEY=sk-xxx ghcr.io/apophisi/notesculpt:latest refine /data/notes.md
 
 # 批量精炼目录
-docker run -v $(pwd):/data -e DEEPSEEK_API_KEY=sk-xxx notesculpt refine /data/notes/
+docker run -v $(pwd):/data -e DEEPSEEK_API_KEY=sk-xxx ghcr.io/apophisi/notesculpt:latest refine /data/notes/
 ```
 
 ### 本地

@@ -109,3 +109,15 @@
 - **学到的教训：** Docker 镜像中 `[project.scripts]` 入口点需通过 `uv sync` 安装项目才能使用，使用 `.dockerignore` 避免将测试/文档复制进镜像
 - **修正记录：** 修复 Docker 镜像中 `notesculpt` 入口点缺失问题。根因是 `uv sync` 默认不安装未显式声明为 package 的项目的 entry points。修正：在 `pyproject.toml` 添加 `[tool.uv] package = true`，并重新生成 `uv.lock`
 
+### GHCR 推送配置
+
+- **时间：** 2026-08-07
+- **执行方式：** OpenCode 交互式
+- **内容：**
+  - CI `build-docker` job 新增 GHCR 登录步骤（`docker/login-action@v3`）
+  - 构建并推送镜像到 `ghcr.io/apophisi/notesculpt:latest`
+  - 保留本地构建步骤用于 Docker 运行测试
+  - README 新增"从 GHCR 拉取"章节
+- **评审结果：** 待验证
+- **人工干预：** 无
+
