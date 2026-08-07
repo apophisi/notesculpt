@@ -48,7 +48,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository_owner | lower }}/notesculpt:latest
+          tags: ghcr.io/apophisi/notesculpt:latest
 
       - name: Build Docker image for local test
         uses: docker/build-push-action@v6
